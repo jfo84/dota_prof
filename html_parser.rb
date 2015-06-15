@@ -1,38 +1,38 @@
 require 'nokogiri'
-require 'mechanize'
 require 'open-uri'
-require 'pry'
 
 @file = Nokogiri::HTML(open("http://www.gosugamers.net/dota2/rankings#team"))
 
-def scrape_team_names
-  team_names = @file.css("span[class='main no-game']")
-  @team_names_2 = []
-  team_names.each do |team|
-    @team_names_2 << team.children[-1].text
-  end
-  puts @team_names_2
+team_names = @file.css("span[class='main no-game']")
+team_names_2 = []
+team_names.each do |team|
+  team_names_2 << team.children[-1].text
 end
 
-def scrape_player_names
-
-  agent = Mechanize.new
-
-  agent.get('http://www.gosugamers.net/dota2/rankings#team') do |team_page|
-
-    @team_names_2.each do |team|
-      agent.click(team_page.link_with(:text => /#{team}/))
-      roster_info = @file.css("div[id='roster']")
-      @roster_info_2 = []
-      roster_info.each do |roster|
-        roster.children.each do |player|
-          @roster_info_2 << player.text
-        end
-      end
-    end
-  end
-  puts @roster_info_2
+team_ids = @file.css("tr[class='ranking-link']")
+team_ids_2 = []
+team_ids.each do |team_data|
+  team_ids_2 << team_data.attributes["data-id"].text
 end
 
-scrape_team_names
-scrape_player_names
+team_hash = Hash[team_ids_2.zip(team_names_2.map {|values| values})]
+team_urls = []
+team_hash.each do |team_id, name|
+  name.gsub!(" ", "-")
+  name.gsub!(".", "-")
+  team_urls << "#{team_id}-#{name.downcase}"
+end
+
+rosters_array = []
+
+team_urls.each do |team_url|
+  @file_2 = Nokogiri::HTML(open("http://www.gosugamers.net/dota2/teams/#{team_url}"))
+  roster = @file_2.css("h5")
+  roster_array = []
+  roster.each do |player|
+    roster_array << player.text
+  end
+  rosters_array << roster_array
+end
+
+@roster_hash = Hash[team_names_2.zip(rosters_array.map {|values| values})]
