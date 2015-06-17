@@ -1,8 +1,10 @@
 require 'nokogiri'
 require 'open-uri'
 
+RANKINGS_URL = "http://www.gosugamers.net/dota2/rankings#team"
+
 def scrape_html
-  @file ||= Nokogiri::HTML(open("http://www.gosugamers.net/dota2/rankings#team"))
+  @file ||= Nokogiri::HTML(open(RANKINGS_URL))
 end
 
 def team_names
@@ -24,7 +26,7 @@ def team_ids
 end
 
 def make_slugs
-  team_hash = Hash[team_ids.zip(team_names.map {|values| values})]
+  team_hash = Hash[team_ids.zip(team_names.map)]
   team_url_slugs = []
   team_hash.each do |team_id, name|
     name.gsub!(" ", "-")
@@ -49,14 +51,14 @@ def scrape_rosters
 end
 
 def roster_hash
-  Hash[team_names.zip(scrape_rosters.map {|values| values})]
+  Hash[team_names.zip(scrape_rosters.map)]
 end
 
 def print_rosters
   roster_hash.each_with_index do |(team_name, roster), index|
     puts "#{index + 1}. #{team_name}"
     roster.each do |player|
-      puts "- #{player}"
+      puts "  - #{player}"
     end
   end
 end
