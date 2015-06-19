@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
+require 'chinese_pinyin'
 
 RANKINGS_URL = "http://www.gosugamers.net/dota2/rankings#team"
 
@@ -63,6 +64,30 @@ def print_rosters
   end
 end
 
+def player_list
+  player_list = []
+  scrape_rosters.each do |roster|
+    roster.each do |player|
+      player_list << Pinyin.t(player)
+    end
+  end
+  player_list
+end
+
+def scrape_account_id
+  id_array = []
+  player_list.each do |player|
+    @file_3 = Nokogiri::HTML(open("http://www.bing.com/search?q=#{player}+player+dotabuff"))
+    id = @file_3.css("cite")
+    if id.include?("dotabuff")
+      id = id[0].text.split("/")
+      id_array << id[2]
+    else
+      id_array << id[0]
+    end
+  end
+  id_array
+end
+
 scrape_html
-scrape_rosters
-print_rosters
+scrape_account_id
