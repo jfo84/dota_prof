@@ -1,6 +1,9 @@
 require 'nokogiri'
 require 'open-uri'
 require 'chinese_pinyin'
+require 'pry'
+
+require_relative 'assets/account_id'
 
 RANKINGS_URL = "http://www.gosugamers.net/dota2/rankings#team"
 
@@ -68,26 +71,23 @@ def player_list
   player_list = []
   scrape_rosters.each do |roster|
     roster.each do |player|
-      player_list << Pinyin.t(player)
+      player_list << player
     end
   end
   player_list
 end
 
-def scrape_account_id
-  id_array = []
-  player_list.each do |player|
-    @file_3 = Nokogiri::HTML(open("http://www.bing.com/search?q=#{player}+player+dotabuff"))
-    id = @file_3.css("cite")
-    if id.include?("dotabuff")
-      id = id[0].text.split("/")
-      id_array << id[2]
-    else
-      id_array << id[0]
-    end
-  end
-  id_array
-end
-
-scrape_html
-scrape_account_id
+# BING STARTED LIMITING. DON'T USE
+#
+# def scrape_account_id
+#   id_array = []
+#   roster_hash.each do |team_name, roster|
+#     roster.each do |player|
+#       @file_3 = Nokogiri::HTML(open("http://www.bing.com/search?q=#{player}+#{team_name}+player+dotabuff"))
+#       id = @file_3.css("cite")
+#       id_array << id[0].text
+#       sleep 10
+#     end
+#   end
+#   id_array
+# end
