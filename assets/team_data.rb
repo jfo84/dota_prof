@@ -1,6 +1,6 @@
 TEAM_NAMES_AND_IDS =
 
-["Team Secret" => 1838315,
+{"Team Secret" => 1838315,
  "ViCi Gaming" => 726228,
  "Evil Geniuses DotA2" => 39,
  "Cloud9" => 1333179,
@@ -49,4 +49,5 @@ TEAM_NAMES_AND_IDS =
  "Balkan Bears Corleone" => 1589592,
  "Immortal Mode On" => 2198910,
  "unknown.xiu" => 2350559,
- "DuzaGaming" => 1748111]
+ "DuzaGaming" => 1748111
+ }
