@@ -3,7 +3,6 @@ require 'open-uri'
 require 'redis'
 require 'httparty'
 require 'json'
-require 'pry'
 
 require_relative 'dota_scraper'
 require_relative 'assets/account_id'
@@ -25,26 +24,30 @@ def league_ids
 end
 
 def league_match_ids
-  league_match_ids = []
+  league_match_ids_2 = []
   league_ids.each do |league_id|
+    counter = 0
     @url = "http://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/v001/?key=2821A34B97E539012E2EA60D19D0A917&league_id=#{league_id}"
     steam_data = HTTParty.get(@url, timeout: 60)
     match_id_array = []
-    until steam_data["result"]["matches"].empty?
+    until counter == 2 || steam_data["result"]["matches"].count <= 1
       steam_data["result"]["matches"].each do |match_data|
         match_id_array << match_data["match_id"] unless match_id_array.include?(match_data["match_id"])
       end
-      last_id = steam_data["result"]["matches"].last["match_id"]
+      last_id = steam_data["result"]["matches"][-2]["match_id"]
       @url = "http://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/v001/?key=2821A34B97E539012E2EA60D19D0A917&league_id=#{league_id}&start_at_match_id=#{last_id}"
       steam_data = HTTParty.get(@url, timeout: 60)
       sleep 1
+      counter += 1 if steam_data["result"]["results_remaining"] == 0
     end
-    league_match_ids << match_id_array
+    league_match_ids_2 << match_id_array
   end
-  Hash[league_ids.zip(top_fifty_match_ids.map)]
+  league_match_ids_2
 end
 
-binding.pry
+def pro_ids
+  Hash[league_ids.zip(league_match_ids.map)]
+end
 
 # def database_entry
 #   redis = Redis.new
