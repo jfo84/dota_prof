@@ -45,18 +45,20 @@ def league_match_ids
   league_match_ids_2
 end
 
-def pro_ids
-  Hash[league_ids.zip(league_match_ids.map)]
+def database_entry
+  league_match_ids.each do |match_id_array|
+    match_id_array.each do |match_id|
+      @url = "http://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/v001/?key=2821A34B97E539012E2EA60D19D0A917&match_id=#{match_id}"
+      steam_data = HTTParty.get(@url, timeout: 60)
+      Match.create!(payload: steam_data)
+    end
+  end
 end
 
-# def database_entry
-#   redis = Redis.new
-#   TEAM_NAMES_AND_IDS.each do |team_name, team_id |
-#     top_fifty_match_ids.each_with_index do | match_id_array, index |
-#       @url = "http://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/v001/?key=2821A34B97E539012E2EA60D19D0A917&team_id=#{team_id}"
-#
-#     end
-#   end
+database_entry
+
+# def pro_ids
+#   Hash[league_ids.zip(league_match_ids.map)]
 # end
 
 # For non-league games

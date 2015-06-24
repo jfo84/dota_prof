@@ -4,7 +4,7 @@ class CreatePlayers < ActiveRecord::Migration
       t.string :name, presence: true
       t.index :name, unique: true
       t.string :real_name, presence: true
-      t.integer :player_id
+      t.integer :account_id
 
       t.timestamps null: false
     end
