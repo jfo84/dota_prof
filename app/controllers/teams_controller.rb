@@ -1,7 +1,6 @@
 class TeamsController < ApplicationController
 	def index
-		@teams = Team.all #placeholder
-    # @teams = Team.where("top_50 = true")
+    @teams = Team.where("top_50 = true")
 	end
 
   def show

@@ -1,6 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 require 'chinese_pinyin'
+require 'httparty'
 
 require_relative 'assets/account_id'
 
@@ -35,7 +36,7 @@ class WebScraper
     team_url_slugs
   end
 
-  def scrape_rosters
+  def rosters_array
     rosters_array = []
     make_slugs.each do |team_url_slug|
       @file_2 = Nokogiri::HTML(open("http://www.gosugamers.net/dota2/teams/#{team_url_slug}"))
@@ -46,17 +47,64 @@ class WebScraper
     rosters_array
   end
 
-  def roster_hash
-    Hash[team_names.zip(scrape_rosters.map)]
+  def database_entry
+    counter = 0
+    rosters_array.each do |roster|
+      curr_team = team_names[counter]
+      Team.create!(name: curr_team, roster: roster, top_50: true)
+      counter += 1
+    end
   end
 
-  def player_list
-    player_list = []
-    scrape_rosters.each do |roster|
-      player_list = roster.map { |player| player }
+  def image_urls
+    image_urls = []
+    make_slugs.each do |team_url_slug|
+      @file_2 = Nokogiri::HTML(open("http://www.gosugamers.net/dota2/teams/#{team_url_slug}"))
+      image = @file_2.css("div[class='image']")
+      image.each do |url|
+        if url.attributes["style"].value.include?('players')
+          image_urls << "http://www.gosugamers.net#{url.attributes["style"].value[23..-4]}"
+        else
+          image_urls << "http://www.gosugamers.net#{url.attributes["style"].value[23..-3]}"
+        end
+      end
     end
-    player_list
+    image_urls
   end
+
+  def create_images
+    team_urls = []
+    player_urls = []
+    image_urls.each do |image_url|
+      if image_url.include?("teams")
+        team_urls.push(image_url)
+      else
+        player_urls.push(image_url)
+      end
+    end
+    team_urls.each_with_index do |team_url, index|
+      File.open("/Users/JRF/my_tools/dota_prof/app/assets/images/teams/team_#{index}.jpg", "wb") do |f|
+        f.write HTTParty.get(team_url).parsed_response
+      end
+    end
+    player_urls.each_with_index do |player_url, index|
+      File.open("/Users/JRF/my_tools/dota_prof/app/assets/images/players/player_#{index}.jpg", "wb") do |f|
+        f.write HTTParty.get(player_url).parsed_response
+      end
+    end
+  end
+
+  # def roster_hash
+  #   Hash[team_names.zip(rosters_array.map)]
+  # end
+
+  # def player_list
+  #   player_list = []
+  #   rosters_array.each do |roster|
+  #     player_list = roster.map { |player| player }
+  #   end
+  #   player_list
+  # end
 
   # def print_rosters
   #   roster_hash.each_with_index do |(team_name, roster), index|

@@ -1,0 +1,16 @@
+<% @matches_rad.each do |match| %>
+  <% if match["result"]["radiant_win"] == "true" %>
+    <%= win_count += 1 %>
+  <% else %>
+    <%= lose_count += 1 %>
+  <% end %>
+<% end %>
+<h5><%= "This team's record is #{win_count} - #{lose_count} on radiant." %></h5>
+<% @matches_dire.each do |match| %>
+  <% if match["result"]["radiant_win"] == "false" %>
+    <%= win_count += 1 %>
+  <% else %>
+    <%= lose_count += 1 %>
+  <% end %>
+<% end %>
+<h5><%= "This team's record is #{win_count} - #{lose_count} on dire." %></h5>

@@ -1,3 +1,27 @@
-<% @teams.each do |team| %>
-  <%= team.name %>
-<% end %>
+<div class="large-1 columns"></div>
+<div class="large-10 columns">
+  <h1>DotaProf</h1>
+  <% counter = 0 %>
+  <% counter_2 = 0 %>
+  <% @teams.each do |team| %>
+    <div class="row">
+      <div class="clearfix">
+        <img class="left" src="assets/teams/team_<%= counter_2 %>.jpg" />
+        <!-- <h3 class = "text-center"><%= team.name %></h3> -->
+        <% counter_2 += 1 %>
+      </div>
+    </div>
+    <div class="row">
+    <div class="large-1 columns"></div>
+    <% team.roster.each do |player| %>
+      <div class="large-2 columns">
+        <%= player %>
+        <img src="assets/players/player_<%= counter %>.jpg" />
+        <% counter += 1 %>
+      </div>
+    <% end %>
+      <div class="large-1 columns"></div>
+    </div>
+  <% end %>
+</div>
+<div class="large-1 columns"></div>

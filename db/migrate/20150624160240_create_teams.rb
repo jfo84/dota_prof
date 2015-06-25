@@ -3,7 +3,7 @@ class CreateTeams < ActiveRecord::Migration
     create_table :teams do |t|
       t.string :name, presence: true
       t.index :name, unique: true
-      t.string :roster, array: true, default: [], presence: true
+      t.string :roster, array: true, default: []
       t.boolean :top_50, presence: true
 
       t.timestamps null: false
