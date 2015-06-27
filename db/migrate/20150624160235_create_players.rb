@@ -1,10 +1,9 @@
 class CreatePlayers < ActiveRecord::Migration
   def change
     create_table :players do |t|
-      t.string :name, presence: true
-      t.index :name, unique: true
-      t.string :real_name, presence: true
-      t.integer :account_id
+      t.integer :account_id, presence: true
+      t.integer :favorite_hero, presence: true
+      t.string :fh_record, presence: true
 
       t.timestamps null: false
     end

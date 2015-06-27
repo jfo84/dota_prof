@@ -5,6 +5,7 @@ class CreateTeams < ActiveRecord::Migration
       t.index :name, unique: true
       t.string :roster, array: true, default: []
       t.boolean :top_50, presence: true
+      
 
       t.timestamps null: false
     end

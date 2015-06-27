@@ -50,7 +50,8 @@ def database_entry
       match_id_array.each do |match_id|
         @url = "http://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/v001/?key=2821A34B97E539012E2EA60D19D0A917&match_id=#{match_id}"
         steam_data = HTTParty.get(@url, timeout: 60)
-        Match.create!(payload: steam_data)
+        game_mode = steam_data["result"]["game_mode"]
+        if game_mode == 1 || game_mode == 2 then Match.create!(payload: steam_data)
         sleep 1
       end
     end

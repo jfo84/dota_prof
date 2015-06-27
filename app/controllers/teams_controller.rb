@@ -4,7 +4,6 @@ class TeamsController < ApplicationController
 	end
 
   def show
-    # @team = Team.where("payload -> 'result' ->> 'radiant_team_id' = params[:id]")
-    # need to use collection_select in the erb instead
+  	@team = Team.find(params[:id])
   end
 end
