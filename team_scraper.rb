@@ -3,8 +3,6 @@ require 'open-uri'
 require 'chinese_pinyin'
 require 'httparty'
 
-require_relative 'assets/account_id'
-
 RANKINGS_URL = "http://www.gosugamers.net/dota2/rankings#team"
 
 class WebScraper

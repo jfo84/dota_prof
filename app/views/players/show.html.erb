@@ -1,9 +1,4 @@
-<!-- pseudocode
-
-<%= @player.name %>
-<%= @player.real_name %> indented with smaller font
-
-<%= collection_select @player, @matches.best_hero %>
-<%= collection_select @player, @matches.worst_hero %> feeeeder
-
- -->
+<h1>Player Profile</h1>
+<h3><%= @player.name %><h3>
+<h5>Favorite Hero: <%= @fav_hero %></h5>
+<img src="assets/heroes/hero_<%= @fav_hero_id %>.jpg" />

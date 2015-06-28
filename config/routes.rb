@@ -2,11 +2,8 @@ Rails.application.routes.draw do
   root 'teams#index'
   devise_for :users
 
-  resources :teams, only: :index do
-    resources :players, only: :index
-  end
-
-  resources :players, only: :show
+  resources :teams, only: :index
+  resources :players, only: [:show, :index]
 
   # Example resource route with options:
   #   resources :products do
