@@ -14,11 +14,11 @@
     <div class="row">
     <div class="large-1 columns"></div>
     <% team.roster.each do |player| %>
-      <div class="large-2 columns">
-        <%= player %>
-        <img src="assets/players/player_<%= counter %>.jpg" />
-        <% counter += 1 %>
-      </div>
+        <div class="large-2 columns">
+          <%= player %>
+          <img src="assets/players/player_<%= counter %>.jpg" />
+          <% counter += 1 %>
+        </div>
     <% end %>
       <div class="large-1 columns"></div>
     </div>
