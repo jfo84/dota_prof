@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20150630023402) do
     t.integer  "hero_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.integer  "match_seq_num"
+    t.integer  "start_time"
   end
 
   create_table "matches", force: :cascade do |t|

@@ -1,5 +1,5 @@
-class AddMatchSeqNumToHeroList < ActiveRecord::Migration
+class AddStartTimeToHeroList < ActiveRecord::Migration
   def change
-    add_column :hero_lists, :match_seq_num, :integer
+    add_column :hero_lists, :start_time, :integer
   end
 end

@@ -8,11 +8,11 @@ def hero_list_seed
       hero_id_list << player["hero_id"]
     end
     counter = 0
+    start_time = match.payload["result"]["start_time"]
     if account_id_list.length == 10
       account_id_list.length.times do
         hero_list = HeroList.new
-        hero_list.assign_attributes(account_id: account_id_list[counter])
-        hero_list.assign_attributes(hero_id: hero_id_list[counter])
+        hero_list.assign_attributes(account_id: account_id_list[counter], hero_id: hero_id_list[counter], start_time: start_time)
         hero_list.save! unless hero_list.account_id.nil? || hero_list.hero_id.nil?
         counter += 1
       end
