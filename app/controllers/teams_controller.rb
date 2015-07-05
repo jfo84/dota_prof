@@ -5,6 +5,8 @@ class TeamsController < ApplicationController
 	end
 
   def show
-  	@team = Team.find(params[:id])
+  	# @team = Team.find(params[:id])
+		# Secret example
+		@team_matches = Match.where("payload -> 'result' ->> 'radiant_team_id' = '1838315' OR payload -> 'result' ->> 'dire_team_id' = '1838315'")
   end
 end
