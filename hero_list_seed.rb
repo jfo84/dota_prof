@@ -20,6 +20,7 @@ def hero_list_seed
   end
 end
 
+
 # game_mode's 1 and 2 are all we want. Fixed on SQL insert side
 
 # def bad_games
@@ -28,6 +29,8 @@ end
 #     Match.where("payload -> 'result' ->> 'game_mode' = '#{counter}'").destroy_all
 #     counter += 1
 #   end
+#   Match.where("(payload -> 'result' ->> 'radiant_team_id') is null").destroy_all
+#   Match.where("(payload -> 'result' ->> 'dire_team_id') is null").destroy_all
 # end
 
 # hero_played_hash = Hash.new[account_id_list.zip(hero_list.map)]

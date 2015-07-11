@@ -1,11 +1,9 @@
 class PlayersController < ApplicationController
   def show
     @player = Player.find_by("account_id = #{params[:id]}")
-    current_list = HeroList.where("account_id = :account_id and start_time > :start_time", account_id: params[:id], start_time: 1430395200)
-    User.where(["name = :name and email = :email", { name: "Joe", email: "joe@example.com" }])
+    @player_matches = PlayerMatch.where("account_id = :account_id and start_time > :start_time", account_id: params[:id], start_time: 1430395200)
     counts = Hash.new(0)
-    current_list.each { |hero_instance| counts[hero_instance.hero_id] += 1 }
-    binding.pry
+    @player_matches.each { |player_match| counts[player_match.hero_id] += 1 }
     @fav_hero_id = counts.sort_by{|x,y| y}.last[0]
     HeroID::HERO_HASH[:result][:heroes].each do |hero|
       if @fav_hero_id == hero[:id]

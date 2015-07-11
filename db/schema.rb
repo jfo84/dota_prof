@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150630023402) do
+ActiveRecord::Schema.define(version: 20150711184051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,15 +19,41 @@ ActiveRecord::Schema.define(version: 20150630023402) do
   create_table "hero_lists", force: :cascade do |t|
     t.integer  "account_id"
     t.integer  "hero_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "start_time"
+  end
+
+  create_table "leagues", force: :cascade do |t|
+    t.string  "name"
+    t.integer "league_id", null: false
   end
 
   create_table "matches", force: :cascade do |t|
     t.jsonb    "payload"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "player_matches", force: :cascade do |t|
+    t.integer  "account_id"
+    t.integer  "hero_id"
+    t.integer  "kills"
+    t.integer  "deaths"
+    t.integer  "assists"
+    t.integer  "gpm"
+    t.integer  "xpm"
+    t.integer  "hero_damage"
+    t.integer  "tower_damage"
+    t.integer  "last_hits"
+    t.integer  "denies"
+    t.string   "inventory",    default: [],                 array: true
+    t.boolean  "radiant",      default: false
+    t.boolean  "radiant_win"
+    t.integer  "start_time"
+    t.integer  "match_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "players", force: :cascade do |t|
