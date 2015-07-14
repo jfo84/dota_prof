@@ -1,16 +1,16 @@
 <h1>Player Profile</h1>
-<h3><%= @player.name %><h3>
-<h5>Favorite Hero: <%= @fav_hero %></h5>
-<img src="assets/heroes/hero_<%= @fav_hero_id %>.jpg" />
 <div class="player_match_data">
+  <h3><%= @player.name %><h3>
+  <h5>Favorite Hero: <%= @eight_four_hero %></h5>
+  <%= image_tag "heroes/hero_#{@eight_four_hero_id}.jpg" %>
   <h3>Professional Averages in 6.84</h3>
-  <h5>Kills: <%= @player_matches.average(:kills).round(1) %></h5>
-  <h5>Deaths: <%= @player_matches.average(:deaths).round(1) %></h5>
-  <h5>Assists: <%= @player_matches.average(:assists).round(1) %></h5>
-  <h5>GPM: <%= @player_matches.average(:gpm).to_i %></h5>
-  <h5>XPM: <%= @player_matches.average(:xpm).to_i %></h5>
-  <h5>Hero Damage: <%= @player_matches.average(:hero_damage).to_i %></h5>
-  <h5>Tower Damage: <%= @player_matches.average(:tower_damage).to_i %></h5>
-  <h5>Last Hits: <%= @player_matches.average(:last_hits).to_i %></h5>
-  <h5>Denies: <%= @player_matches.average(:denies).to_i %></h5>
+  <h5>Kills: <%= @eight_four_matches.average(:kills).round(1) %></h5>
+  <h5>Deaths: <%= @eight_four_matches.average(:deaths).round(1) %></h5>
+  <h5>Assists: <%= @eight_four_matches.average(:assists).round(1) %></h5>
+  <h5>GPM: <%= @eight_four_matches.average(:gpm).to_i %></h5>
+  <h5>XPM: <%= @eight_four_matches.average(:xpm).to_i %></h5>
+  <h5>Hero Damage: <%= @eight_four_matches.average(:hero_damage).to_i %></h5>
+  <h5>Tower Damage: <%= @eight_four_matches.average(:tower_damage).to_i %></h5>
+  <h5>Last Hits: <%= @eight_four_matches.average(:last_hits).to_i %></h5>
+  <h5>Denies: <%= @eight_four_matches.average(:denies).to_i %></h5>
 </div>

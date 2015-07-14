@@ -4,23 +4,32 @@
   <% counter = 0 %>
   <% counter_2 = 0 %>
   <% @teams.each do |team| %>
-    <div class="row">
-      <div class="clearfix">
-        <img class="left" src="assets/teams/team_<%= counter_2 %>.jpg" />
-        <!-- <h3 class = "text-center"><%= team.name %></h3> -->
-        <% counter_2 += 1 %>
-      </div>
-    </div>
-    <div class="row">
-    <div class="large-1 columns"></div>
-    <% team.roster.each do |player| %>
-        <div class="large-2 columns">
-          <%= player %>
-          <img src="assets/players/player_<%= counter %>.jpg" />
-          <% counter += 1 %>
+    <div class="team">
+      <div class="panel">
+        <div class="row">
+          <div class="clearfix">
+            <img class="left" src="assets/teams/team_<%= counter_2 %>.jpg" />
+            <!-- <h3 class = "text-center"><%= team.name %></h3> -->
+            <% counter_2 += 1 %>
+          </div>
         </div>
-    <% end %>
-      <div class="large-1 columns"></div>
+        <div class="row">
+        <div class="large-1 columns"></div>
+        <% team.roster.each do |player| %>
+            <div class="large-2 columns">
+              <% @players.each do |player_2| %>
+                <% if player == player_2.name %>
+                  <a href="/players/<%= player_2.account_id %>"/>
+                <% end %>
+              <% end %>
+              <img src="assets/players/player_<%= counter %>.jpg" />
+              <%= player %>
+              <% counter += 1 %>
+            </div>
+        <% end %>
+          <div class="large-1 columns"></div>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
