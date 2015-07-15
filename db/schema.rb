@@ -11,18 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715034828) do
+ActiveRecord::Schema.define(version: 20150715182623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "hero_lists", force: :cascade do |t|
-    t.integer  "account_id"
-    t.integer  "hero_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "start_time"
-  end
 
   create_table "leagues", force: :cascade do |t|
     t.string  "name"
@@ -33,6 +25,8 @@ ActiveRecord::Schema.define(version: 20150715034828) do
     t.jsonb    "payload"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "start_time"
+    t.integer  "match_id"
   end
 
   create_table "player_matches", force: :cascade do |t|

@@ -60,6 +60,18 @@ def database_entry
   end
 end
 
+# game_mode's 1 and 2 are all we want. Fixed on SQL insert side
+
+# def bad_games
+#   counter = 3
+#   19.times do
+#     Match.where("payload -> 'result' ->> 'game_mode' = '#{counter}'").destroy_all
+#     counter += 1
+#   end
+#   Match.where("(payload -> 'result' ->> 'radiant_team_id') is null").destroy_all
+#   Match.where("(payload -> 'result' ->> 'dire_team_id') is null").destroy_all
+# end
+
 # def pro_ids
 #   Hash[league_ids.zip(league_match_ids.map)]
 # end
