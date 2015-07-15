@@ -1,8 +1,7 @@
 <head>
 </head>
 <body>
-  <div class="large-1 columns"></div>
-  <div class="large-10 columns">
+  <div class="large-12 columns">
     <div class="large-offset-1 row">
       <div class="large-3 columns">
         <img src="assets/dota_prof_logo.png" class="logo" />
@@ -12,14 +11,12 @@
     <% counter = 0 %>
     <% counter_2 = 0 %>
     <% @teams.each do |team| %>
-      <div class="team">
+      <div class="team large-offset-1 row">
         <div class="panel">
           <div class="clearfix">
-            <div class="left large-3 columns">
-              <img class="team-image" src="assets/teams/team_<%= counter_2 %>.jpg" />
-              <% counter_2 += 1 %>
-            </div>
-            <div class="team-name large-9 columns text-center end"><%= team.name %></div>
+            <img class="team-image left" src="assets/teams/team_<%= counter_2 %>.jpg" />
+            <% counter_2 += 1 %>
+            <div class="team-name right"><%= team.name %></div>
           </div>
           <hr>
           <div class="large-offset-1 row end">
