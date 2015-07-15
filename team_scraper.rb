@@ -29,6 +29,7 @@ class WebScraper
     team_hash.each do |team_id, name|
       name.gsub!(" ", "-")
       name.gsub!(".", "-")
+      name.gsub!("'","-")
       team_url_slugs << "#{team_id}-#{name.downcase}"
     end
     team_url_slugs
@@ -37,10 +38,15 @@ class WebScraper
   def rosters_array
     rosters_array = []
     make_slugs.each do |team_url_slug|
-      @file_2 = Nokogiri::HTML(open("http://www.gosugamers.net/dota2/teams/#{team_url_slug}"))
+      begin
+        @file_2 = Nokogiri::HTML(open("http://www.gosugamers.net/dota2/teams/#{team_url_slug}"))
+      rescue OpenURI::HTTPError
+        retry
+      end
       roster = @file_2.css("h5")
       roster_array = roster.map { |player| player.text }
       rosters_array << roster_array
+      sleep 5
     end
     rosters_array
   end
@@ -48,8 +54,12 @@ class WebScraper
   def database_entry
     counter = 0
     rosters_array.each do |roster|
-      curr_team = team_names[counter]
-      Team.create!(name: curr_team, roster: roster, top_50: true)
+      curr_name = team_names[counter]
+      team = Team.find_by name: curr_name
+      if team.nil?
+        binding.pry
+      end
+      team.update(roster: roster, top_50: true)
       counter += 1
     end
   end
@@ -104,28 +114,5 @@ class WebScraper
   #   player_list
   # end
 
-  # def print_rosters
-  #   roster_hash.each_with_index do |(team_name, roster), index|
-  #     puts "#{index + 1}. #{team_name}"
-  #     roster.each do |player|
-  #       puts "  - #{player}"
-  #     end
-  #   end
-  # end
-
-  # BING STARTED LIMITING. DON'T USE
-  #
-  # def scrape_account_id
-  #   id_array = []
-  #   roster_hash.each do |team_name, roster|
-  #     roster.each do |player|
-  #       @file_3 = Nokogiri::HTML(open("http://www.bing.com/search?q=#{player}+#{team_name}+player+dotabuff"))
-  #       id = @file_3.css("cite")
-  #       id_array << id[0].text
-  #       sleep 10
-  #     end
-  #   end
-  #   id_array
-  # end
 
 end

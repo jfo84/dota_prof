@@ -1,6 +1,10 @@
 <h1>Player Profile</h1>
 <div class="player_match_data">
-  <h3><%= @player.name %><h3>
+  <% unless @player.name.nil? %>
+    <h3><%= @player.name %><h3>
+  <% else %>
+    <h3>Player name missing.</h3>
+  <% end %>
   <h5>Favorite Hero: <%= @eight_four_hero %></h5>
   <%= image_tag "heroes/hero_#{@eight_four_hero_id}.jpg" %>
   <h3>Professional Averages in 6.84</h3>

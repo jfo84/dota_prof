@@ -15,16 +15,14 @@
         </div>
         <div class="row">
         <div class="large-1 columns"></div>
+        <% counter_3 = 0 %>
         <% team.roster.each do |player| %>
             <div class="large-2 columns">
-              <% @players.each do |player_2| %>
-                <% if player == player_2.name %>
-                  <a href="/players/<%= player_2.account_id %>"/>
-                <% end %>
-              <% end %>
+              <a href="/players/<%= team.id_roster[counter_3] %>"/>
               <img src="assets/players/player_<%= counter %>.jpg" />
               <%= player %>
               <% counter += 1 %>
+              <% counter_3 += 1 %>
             </div>
         <% end %>
           <div class="large-1 columns"></div>

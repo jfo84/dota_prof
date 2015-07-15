@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
 	def index
-    @teams = Team.where("top_50 = true")
+    @teams = Team.where("top_50 = true").order(rank: :asc)
 		@players = Player.all
 	end
 
