@@ -1,41 +1,51 @@
-<head>
-</head>
-<body>
-  <div class="large-12 columns">
-    <div class="large-offset-1 row">
-      <div class="large-3 columns">
-        <img src="assets/dota_prof_logo.png" class="logo" />
-      </div>
-      <div class="title left large-9 columns text-center">DOTA - PROF</div>
+<div id="main" class="large-12 columns">
+  <div class="large-offset-1 row">
+    <div class="large-3 columns">
+      <img src="assets/dota_prof_logo.png" class="logo" />
     </div>
-    <% counter = 0 %>
-    <% counter_2 = 0 %>
-    <% @teams.each do |team| %>
-      <div class="team large-offset-1 row">
-        <div class="panel">
-          <div class="clearfix">
-            <img class="team-image left" src="assets/teams/team_<%= counter_2 %>.jpg" />
-            <% counter_2 += 1 %>
-            <div class="team-name right"><%= team.name %></div>
-          </div>
-          <hr>
-          <div class="large-offset-1 row end">
-            <% counter_3 = 0 %>
-            <% team.roster.each do |player| %>
-              <a href="/players/<%= team.id_roster[counter_3] %>" class="player-link" style="display: block">
-                <div class="large-2 columns player-panel">
-                  <img src="assets/players/player_<%= counter %>.jpg" class="player-image" />
-                  <div class="player-name text-center">
-                    <%= player %>
-                  </div>
-                  <% counter += 1 %>
-                  <% counter_3 += 1 %>
+    <div class="title left large-9 columns text-center">DOTA - PROF</div>
+  </div>
+  <% counter = 0 %>
+  <% counter_2 = 0 %>
+  <% @teams.each do |team| %>
+    <div class="team large-offset-1 row">
+      <div class="panel">
+        <div class="clearfix">
+          <img class="team-image left" src="assets/teams/team_<%= counter_2 %>.jpg" />
+          <% counter_2 += 1 %>
+          <div class="team-name right"><%= team.name %></div>
+        </div>
+        <hr>
+        <div class="row end">
+          <% counter_3 = 0 %>
+          <% team.roster.each do |player| %>
+            <a href="/players/<%= team.id_roster[counter_3] %>" class="player-link">
+              <div class="large-2 columns player-panel clearfix">
+                <img src="assets/players/player_<%= counter %>.jpg" class="player-image" />
+                <div class="player-name text-center">
+                  <%= player %>
                 </div>
-              </a>
-            <% end %>
-          </div>
+                <% counter += 1 %>
+                <% counter_3 += 1 %>
+              </div>
+            </a>
+          <% end %>
+          <a href="#" class="view-team-details">View Details</a>
+        </div>
+        <div class="row team-info" style="display:none">
+            team data
         </div>
       </div>
-    <% end %>
-  </div>
-</body>
+    </div>
+  <% end %>
+</div>
+<%= content_for :extra_footer do %>
+  <script type="text/javascript">
+    $(function(){
+      $(".view-team-details").on('click', function(e){
+        e.preventDefault();
+        $(e.currentTarget).parent().next().toggle();
+      });
+    });
+  </script>
+<% end %>

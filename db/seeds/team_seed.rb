@@ -3,7 +3,7 @@ require 'open-uri'
 class TeamSeed
 
   def team_seed
-    matches = Match.all
+    matches = Match.all.order(:start_time)
     matches.each do |match|
       rad_team_id = match.payload["result"]["radiant_team_id"]
       rad_name = match.payload["result"]["radiant_name"]
