@@ -2,7 +2,7 @@ class PlayerMatchSeed
   attr_accessor :matches
 
   def initialize
-    matches = Match.all
+    @matches ||= Match.all
   end
 
   def player_match_seed
@@ -24,8 +24,8 @@ class PlayerMatchSeed
         0.upto(5) do |i|
           inventory << player["item_#{i}"]
         end
-        radiant_win = match.payload["result"]["radiant_win"],
-        start_time = match.payload["result"]["start_time"],
+        radiant_win = match.payload["result"]["radiant_win"]
+        start_time = match.payload["result"]["start_time"]
         match_id = match.payload["result"]["match_id"]
         player_match.assign_attributes(account_id: account_id,
                                      hero_id: hero_id,
@@ -49,5 +49,6 @@ class PlayerMatchSeed
         player_match.save!
       end
     end
+    nil
   end
 end

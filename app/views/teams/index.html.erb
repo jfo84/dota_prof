@@ -1,4 +1,4 @@
-<div id="main" class="large-12 columns">
+<div id="main-index" class="large-12 columns">
   <div class="large-offset-1 row">
     <div class="large-3 columns">
       <img src="assets/dota_prof_logo.png" class="logo" />
@@ -12,7 +12,6 @@
       <div class="panel">
         <div class="clearfix">
           <img class="team-image left" src="assets/teams/team_<%= counter_2 %>.jpg" />
-          <% counter_2 += 1 %>
           <div class="team-name right"><%= team.name %></div>
         </div>
         <hr>
@@ -33,8 +32,11 @@
           <a href="#" class="view-team-details">View Details</a>
         </div>
         <div class="row team-info" style="display:none">
-            team data
+            <div class="large-2 columns clearfix">
+              Top Drafter: <%= Player.find_by(account_id: @captain_list[counter_2][0][0]).name %>
+            </div>
         </div>
+        <% counter_2 += 1 %>
       </div>
     </div>
   <% end %>

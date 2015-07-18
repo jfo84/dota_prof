@@ -20,11 +20,14 @@
 
 body {
  font-family: 'Quicksand', sans-serif;
- background-image: url("wallpaper_1.png");
- background-repeat: no-repeat;
- background-attachment: fixed;
- background-size: cover;
  overflow-x: hidden;
+}
+
+#main-index {
+  background-image: url("wallpaper_1.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 .logo {
@@ -50,8 +53,6 @@ body {
  background-color: rgba(105, 105, 105, 0.7);
  padding: 15px 8px 8px 30px;
  box-shadow: -3px 5px 3px #E6E6E6;
- max-width: 1500px;
- min-width: 1050px;
  z-index: -10;
 }
 
