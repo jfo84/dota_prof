@@ -29,12 +29,33 @@
               </div>
             </a>
           <% end %>
-          <a href="#" class="view-team-details">View Details</a>
-        </div>
-        <div class="row team-info" style="display:none">
-            <div class="large-2 columns clearfix">
-              Top Drafter: <%= Player.find_by(account_id: @captain_list[counter_2][0][0]).name %>
+          <a href="#" class="team-details-link">
+            <div class="large-1 columns view-team-details">
+              View Draft Info
             </div>
+          </a>
+        </div>
+        <div class="row" style="display:none">
+          <div class="large-12 large-centered columns team-info">
+            <hr>
+            <div class="large-4 columns draft clearfix">
+              <h3>Top Captain</h3>
+              <h3><i><%= Player.find_by(account_id: @captain_list[counter_2][0][0]).name %></i></h3>
+              <h3>W/L <%= @win_list[counter_2][0][1] %> - <%= @captain_list[counter_2][0][1] - @win_list[counter_2][0][1] %></h3>
+              <% unless @captain_list[counter_2][1].nil? || @captain_list[counter_2][1][1] < 5 %>
+                <hr>
+                <h3>#2 Captain</h3>
+                <h3><i><%= Player.find_by(account_id: @captain_list[counter_2][1][0]).name %></i></h3>
+                <h3>W/L <%= @win_list[counter_2][1][1] %> - <%= @captain_list[counter_2][1][1] - @win_list[counter_2][1][1] %></h3>
+              <% end %>
+            </div>
+            <div class="large-4 columns draft clearfix">
+                <h3>Top Picks </h3><%= image_tag "heroes/hero_#{@pick_list[counter_2][0][0]}.jpg" %><%= image_tag "heroes/hero_#{@pick_list[counter_2][1][0]}.jpg" %>
+            </div>
+            <div class="large-4 columns draft clearfix">
+                <h3>Top Bans </h3><%= image_tag "heroes/hero_#{@ban_list[counter_2][0][0]}.jpg" %><%= image_tag "heroes/hero_#{@pick_list[counter_2][1][0]}.jpg" %>
+            </div>
+          </div>
         </div>
         <% counter_2 += 1 %>
       </div>
@@ -44,7 +65,7 @@
 <%= content_for :extra_footer do %>
   <script type="text/javascript">
     $(function(){
-      $(".view-team-details").on('click', function(e){
+      $(".team-details-link").on('click', function(e){
         e.preventDefault();
         $(e.currentTarget).parent().next().toggle();
       });

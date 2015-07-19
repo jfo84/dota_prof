@@ -23,6 +23,11 @@ body {
  overflow-x: hidden;
 }
 
+.panel h3 {
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+}
+
 #main-index {
   background-image: url("wallpaper_1.png");
   background-repeat: no-repeat;
@@ -68,8 +73,21 @@ body {
 }
 
 .view-team-details {
+  text-align: center;
+  vertical-align: middle;
+  font-size: 20px;
+  background-color: #B2B2B2;
+  border: 1px solid #000000;
+  z-index: 0;
+}
+
+.team-info {
+  margin: 20px 30px 10px 30px;
+  text-align: center;
+}
+
+.draft {
   color: white;
-  vertical-align: bottom;
 }
 
 .player-link {
