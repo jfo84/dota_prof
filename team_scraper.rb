@@ -2,6 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'chinese_pinyin'
 require 'httparty'
+require 'fuzzy_match'
 
 RANKINGS_URL = "http://www.gosugamers.net/dota2/rankings#team"
 
@@ -42,6 +43,7 @@ class WebScraper
         @file_2 = Nokogiri::HTML(open("http://www.gosugamers.net/dota2/teams/#{team_url_slug}"))
       rescue OpenURI::HTTPError
         retry
+        sleep 5
       end
       roster = @file_2.css("h5")
       roster_array = roster.map { |player| player.text }
