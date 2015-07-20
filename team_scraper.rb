@@ -42,27 +42,30 @@ class WebScraper
       begin
         @file_2 = Nokogiri::HTML(open("http://www.gosugamers.net/dota2/teams/#{team_url_slug}"))
       rescue OpenURI::HTTPError
-        retry
         sleep 5
+        retry
       end
       roster = @file_2.css("h5")
       roster_array = roster.map { |player| player.text }
       rosters_array << roster_array
-      sleep 5
+      sleep 2
     end
     rosters_array
   end
 
-  def database_entry
-    counter = 0
-    rosters_array.each do |roster|
-      curr_name = team_names[counter]
-      team = Team.find_by name: curr_name
+  def update_rank
+    rosters_array.each_with_index do |roster, index|
+      curr_name = team_names[index]
+      teams = Team.all
+      team_names = teams.map { |team| team.name }
+      team_name = FuzzyMatch.new(team_names).find(curr_name)
+      team = Team.find_by name: team_name
       if team.nil?
         binding.pry
       end
-      team.update(roster: roster, top_50: true)
-      counter += 1
+      rank = index + 1
+      binding.pry
+      team.update(rank: rank)
     end
   end
 
@@ -71,9 +74,13 @@ class WebScraper
     make_slugs.each do |team_url_slug|
       @file_2 = Nokogiri::HTML(open("http://www.gosugamers.net/dota2/teams/#{team_url_slug}"))
       image = @file_2.css("div[class='image']")
-      image.each do |url|
+      image.each_with_index do |url, index|
         if url.attributes["style"].value.include?('players')
-          image_urls << "http://www.gosugamers.net#{url.attributes["style"].value[23..-4]}"
+          if index == 5
+            nil
+          else
+            image_urls << "http://www.gosugamers.net#{url.attributes["style"].value[23..-4]}"
+          end
         else
           image_urls << "http://www.gosugamers.net#{url.attributes["style"].value[23..-3]}"
         end
@@ -101,6 +108,19 @@ class WebScraper
       File.open("/Users/JRF/my_tools/dota_prof/app/assets/images/players/player_#{index}.jpg", "wb") do |f|
         f.write HTTParty.get(player_url).parsed_response
       end
+    end
+  end
+
+  def roster_image_match
+    teams = Team.where("rank <= 25").order(rank: :asc)
+    teams.each_with_index do |team, index|
+      new_roster = []
+      rosters_array[index].each do |player_name|
+        match = FuzzyMatch.new(team.roster).find(player_name)
+        new_roster << match
+      end
+      binding.pry
+      team.update!(roster: new_roster)
     end
   end
 

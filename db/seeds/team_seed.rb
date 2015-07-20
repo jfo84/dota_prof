@@ -3,7 +3,7 @@ require 'open-uri'
 class TeamSeed
 
   def team_seed
-    matches = Match.all.order(:start_time)
+    matches = Match.all.order(start_time: :asc)
     matches.each do |match|
       rad_team_id = match.payload["result"]["radiant_team_id"]
       rad_name = match.payload["result"]["radiant_name"]
@@ -27,19 +27,17 @@ class TeamSeed
   end
 
   def roster_seed
-    teams = Team.where("top_50 = true")
+    teams = Team.all
     teams.each do |team|
       roster = []
       team.id_roster.each do |account_id|
-        player = Player.find_by account_id: account_id
-        unless player.name.nil? || player.nil?
-          roster << player.name
-        else
-          roster << "Blank"
+        player = Player.find_or_create_by account_id: account_id
+        if player.name.nil?
+          player.assign_attributes(name: "Unknown")
         end
+        roster << player.name
       end
       team.update!(roster: roster)
     end
   end
-
 end
