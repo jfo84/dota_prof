@@ -31,7 +31,7 @@ body {
 }
 
 #main-index {
-  background-image: url('<%= asset_path("wallpaper_1.png") %> ';
+  background-image: url('<%= asset_path("wallpaper_1.png") %> ');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
