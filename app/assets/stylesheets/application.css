@@ -16,6 +16,8 @@
 
  */
 
+ //= depend_on_asset "wallpaper_1.png"
+
 @import url(http://fonts.googleapis.com/css?family=Quicksand:400,700);
 
 body {
@@ -29,7 +31,7 @@ body {
 }
 
 #main-index {
-  background-image: url("wallpaper_1.png");
+  background-image: url('<%= asset_path("wallpaper_1.png") %> ';
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
