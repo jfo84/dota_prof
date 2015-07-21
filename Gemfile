@@ -31,3 +31,5 @@ group :development, :test do
   gem 'fuzzy_match'
   gem 'pry-rails'
 end
+
+ruby "2.2.0"
