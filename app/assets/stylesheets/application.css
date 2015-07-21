@@ -72,13 +72,26 @@ body {
  position: relative;
 }
 
+.team-details-link {
+  transition: all .15s ease-in-out;
+}
+
+.team-details-link :hover {
+  transform: scale(1.1);
+}
+
 .view-team-details {
   text-align: center;
   vertical-align: middle;
   font-size: 20px;
   background-color: #B2B2B2;
   border: 1px solid #000000;
+  transition: none;
   z-index: 0;
+}
+
+.view-team-details :hover {
+  transform: none;
 }
 
 .team-info {
@@ -91,8 +104,13 @@ body {
 }
 
 .player-link {
+  transition: all .15s ease-in-out;
   position: relative;
   z-index: 5;
+}
+
+.player-link :hover {
+  transform: scale(1.1);
 }
 
 .player-panel {
@@ -101,7 +119,12 @@ body {
  background-color: #B2B2B2;
  padding: 4px 4px 0;
  box-shadow: 0 3px 6px #1a1a1a;
+ transition: none;
  z-index: -2;
+}
+
+.player-panel :hover {
+  transform: none;
 }
 
 .player-image {
@@ -115,4 +138,5 @@ body {
 
 .player-name {
  vertical-align: middle;
+ overflow: hidden;
 }

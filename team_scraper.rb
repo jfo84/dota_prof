@@ -64,10 +64,10 @@ class WebScraper
         binding.pry
       end
       rank = index + 1
-      binding.pry
       team.update(rank: rank)
     end
   end
+
 
   def image_urls
     image_urls = []
@@ -119,7 +119,6 @@ class WebScraper
         match = FuzzyMatch.new(team.roster).find(player_name)
         new_roster << match
       end
-      binding.pry
       team.update!(roster: new_roster)
     end
   end
