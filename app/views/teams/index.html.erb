@@ -10,7 +10,7 @@
     <div class="team large-offset-1 row">
       <div class="panel">
         <div class="clearfix">
-          <%= image_tag "assets/teams/team_#{index}.jpg", :class => "team-image left" %>
+          <%= image_tag "teams/team_#{index}.jpg", :class => "team-image left" %>
           <div class="team-name right"><%= team.name %></div>
         </div>
         <hr>
@@ -18,7 +18,7 @@
           <% team.roster.each_with_index do |player, i| %>
             <a href="/players/<%= team.id_roster[i] %>" class="player-link">
               <div class="large-2 columns player-panel clearfix">
-                <%= image_tag "assets/players/player_#{counter}.jpg", :class => "player-image" %>
+                <%= image_tag "players/player_#{counter}.jpg", :class => "player-image" %>
                 <div class="player-name text-center">
                   <%= player %>
                 </div>
