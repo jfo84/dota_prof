@@ -24,4 +24,29 @@
           Denies: <%= @eight_four_matches.average(:denies).to_i %></h5>
     </div>
   </div>
+  <div class="row submissions">
+    <h1>Prof Submissions</h1>
+    <hr>
+    <div class="large-12 columns">
+      <% unless @submissions.nil? %>
+        <% @submissions.each do |submission| %>
+          <h3><span id="score-<%= submission.id %>"><%= submission.votes_for.size %></span>
+              <%= link_to like_player_submission_path(@player, submission), class: "like-button" do %>
+                <span><%= image_tag "like.png", :class => "like", :id => submission.id %></span>
+              <% end %>
+              <%= submission.content %></h3>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="new-submission container">
+      <%= form_for [@player, @submission] do |f| %>
+
+        <%= f.label "content" %>
+        <%= f.text_area :content %>
+
+        <%= f.submit "Submit", class: "button tiny round" %>
+      <% end %>
+    </div>
+  </div>
+</div>
 </div>

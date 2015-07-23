@@ -12,6 +12,8 @@ gem 'foundation-rails'
 gem 'httparty'
 gem 'pry'
 gem 'chinese_pinyin'
+gem 'acts_as_votable'
+gem 'link_thumbnailer'
 
 group :production do
   gem 'puma'

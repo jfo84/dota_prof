@@ -5,15 +5,20 @@ Rails.application.routes.draw do
   resources :teams, only: :index
   resources :players, only: [:show, :index]
 
-  # namespace :admin do
-  #   resources :users, only: [:index, :destroy]
-  #   resources :submissions, only: [:index, :destroy]
-  # end
+  namespace :admin do
+    resources :users, only: [:index, :destroy]
+    resources :players, only: [:index, :destroy]
+    resources :submissions, only: [:index, :destroy]
+  end
 
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  resources :players do
+    resources :submissions, only: [:new, :create, :show, :destroy] do
+      member do
+        put "like", to: "submissions#vote"
+      end
+    end
+  end
+
+
+  resources :submissions, only: [:edit, :update]
 end

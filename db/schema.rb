@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150720182711) do
+ActiveRecord::Schema.define(version: 20150723145945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,24 @@ ActiveRecord::Schema.define(version: 20150720182711) do
 
   add_index "players", ["account_id"], name: "index_players_on_account_id", unique: true, using: :btree
 
+  create_table "submissions", force: :cascade do |t|
+    t.text     "content"
+    t.boolean  "sub_in_review",      default: true
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "user_id"
+    t.integer  "player_id"
+    t.integer  "cached_votes_total", default: 0
+    t.integer  "cached_votes_score", default: 0
+    t.integer  "cached_votes_up",    default: 0
+    t.integer  "cached_votes_down",  default: 0
+  end
+
+  add_index "submissions", ["cached_votes_down"], name: "index_submissions_on_cached_votes_down", using: :btree
+  add_index "submissions", ["cached_votes_score"], name: "index_submissions_on_cached_votes_score", using: :btree
+  add_index "submissions", ["cached_votes_total"], name: "index_submissions_on_cached_votes_total", using: :btree
+  add_index "submissions", ["cached_votes_up"], name: "index_submissions_on_cached_votes_up", using: :btree
+
   create_table "team_matches", force: :cascade do |t|
     t.string   "team_name"
     t.integer  "team_id"
@@ -113,5 +131,20 @@ ActiveRecord::Schema.define(version: 20150720182711) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.integer  "voter_id"
+    t.string   "voter_type"
+    t.boolean  "vote_flag"
+    t.string   "vote_scope"
+    t.integer  "vote_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
 end

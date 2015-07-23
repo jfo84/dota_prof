@@ -142,3 +142,7 @@ body {
  vertical-align: middle;
  overflow: hidden;
 }
+
+.like {
+  width: 40px;
+}
