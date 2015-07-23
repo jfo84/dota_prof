@@ -39,9 +39,7 @@
                 <span><%= image_tag "like.png", :class => "like", :id => submission.id %></span>
               <% end %>
             </div>
-            <div class="large-8 columns submission-content">
-              <h3><%= submission.content %></h3>
-            </div>
+            <div class="large-8 columns submission-content"><%= submission.content %></div>
             <div class="large-2 columns right">
               <% if (user_signed_in? && submission.user == current_user) || (user_signed_in? && current_user.role == 'admin') %>
                 <%=
