@@ -14,6 +14,8 @@ gem 'pry'
 gem 'chinese_pinyin'
 gem 'acts_as_votable'
 gem 'link_thumbnailer'
+gem 'angularjs-rails'
+gem 'angular-rails-templates'
 
 group :production do
   gem 'puma'

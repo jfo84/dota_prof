@@ -38,6 +38,11 @@ GEM
       tzinfo (~> 1.1)
     acts_as_votable (0.10.0)
     addressable (2.3.8)
+    angular-rails-templates (0.1.4)
+      railties (>= 3.1)
+      sprockets
+      tilt
+    angularjs-rails (1.4.3)
     arel (6.0.0)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
@@ -232,6 +237,8 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_votable
+  angular-rails-templates
+  angularjs-rails
   byebug
   capybara
   chinese_pinyin

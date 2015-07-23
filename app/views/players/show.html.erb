@@ -38,14 +38,30 @@
         <% end %>
       <% end %>
     </div>
-    <div class="new-submission container">
-      <%= form_for [@player, @submission] do |f| %>
+  </div>
+  <div class="row">
+    <div class="new-submission container" ng-controller="ThumbnailsCtrl">
+      <%= form_for [@player, @submission], :html => { "ng-submit" => "submit()" } do |f| %>
 
         <%= f.label "content" %>
-        <%= f.text_area :content %>
+        <%= f.text_area :content, "ng-model" => "url", required: true %>
 
         <%= f.submit "Submit", class: "button tiny round" %>
       <% end %>
+    </div>
+  </div>
+  <div class="row" ng-controller="ThumbnailsCtrl">
+    <div class="large-6 columns">
+      <slide ng-repeat="video in videos">
+        <div ng-bind-html="html_safe(video.embed_code)"></div>
+      </slide>
+    </div>
+    <div class="large-6 columns">
+      <h3 style="margin-top: 0px; text-align: left;">
+        {{ title }}
+        <img ng-src="{{ favicon }}" ng-if="favicon" width="20" height="20">
+      </h3>
+      <p class="lead" style="text-align: left;">{{ description }}</p>
     </div>
   </div>
 </div>

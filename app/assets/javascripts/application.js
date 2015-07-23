@@ -13,7 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
-//= require vote.js
+//= require angular
+//= require angular-route
+//= require angular-resource
+//= require angular-sanitize
+//= require angular-rails-templates
+//= require main
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
