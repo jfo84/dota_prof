@@ -59,7 +59,7 @@ class SubmissionsController < ApplicationController
   def destroy
     @submission = Submission.find(params[:id]).destroy
     flash[:notice] = "Your submission has been deleted"
-    redirect_to player_path(params[:player_id])
+    redirect_to player_path(@player.account_id)
   end
 
   private

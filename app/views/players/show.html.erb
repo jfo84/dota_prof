@@ -29,12 +29,38 @@
     <hr>
     <div class="large-12 columns">
       <% unless @submissions.nil? %>
-        <% @submissions.each do |submission| %>
-          <h3><span id="score-<%= submission.id %>"><%= submission.votes_for.size %></span>
+        <% @submissions.each_with_index do |submission, index| %>
+          <div class="row">
+            <div class="large-1 columns">
+              <span id="score-<%= submission.id %>"><h3><%= submission.votes_for.size %></h3></span>
+            </div>
+            <div class="large-1 columns">
               <%= link_to like_player_submission_path(@player, submission), class: "like-button" do %>
                 <span><%= image_tag "like.png", :class => "like", :id => submission.id %></span>
               <% end %>
-              <%= submission.content %></h3>
+            </div>
+            <div class="large-8 columns submission-content">
+              <h3><%= submission.content %></h3>
+            </div>
+            <div class="large-2 columns right">
+              <% if (user_signed_in? && submission.user == current_user) || (user_signed_in? && current_user.role == 'admin') %>
+                <%=
+                  link_to "Delete", player_submission_path(@player, submission),
+                  class: "button form-control",
+                  method: :delete
+                %>
+              <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-6 large-centered columns submission-thumbnail">
+              <% if @videos[index] != nil %>
+                <iframe width="560" height="315" src="<%= @videos[index] %>" allowfullscreen></iframe>
+              <% elsif @images[index] != nil %>
+                <%= image_tag @images[index], class: "submission-image" %>
+              <% end %>
+            </div>
+          </div>
         <% end %>
       <% end %>
     </div>

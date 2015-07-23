@@ -1,9 +1,28 @@
 class PlayersController < ApplicationController
+
+  EXCEPTIONS = [URI::InvalidURIError, LinkThumbnailer::Exceptions]
+
   def show
     @player = Player.find_by("account_id = #{params[:id]}")
     @submissions = @player.submissions.order(:cached_votes_up => :desc)
     @submission = Submission.new
-
+    @videos = []
+    @images = []
+    @submissions.each do |submission|
+      begin
+        link_thumbnail = LinkThumbnailer.generate(submission.content)
+        unless link_thumbnail.videos[0].nil?
+          video = link_thumbnail.videos[0].src
+          @videos << video
+        else
+          image = link_thumbnail.images[0].src
+          @images << image
+        end
+      rescue *EXCEPTIONS
+        @videos << nil
+        @images << nil
+      end
+    end
     @eight_four_matches = PlayerMatch.where("account_id = :account_id and start_time > :start_time", account_id: params[:id], start_time: 1430395200)
     counts = Hash.new(0)
     @eight_four_matches.each { |player_match| counts[player_match.hero_id] += 1 }

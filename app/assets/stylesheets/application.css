@@ -146,3 +146,22 @@ body {
 .like {
   width: 40px;
 }
+
+.submissions {
+  font-size: 20px;
+}
+
+.submission-content {
+  white-space: nowrap;
+  overflow:hidden !important;
+  text-overflow: ellipsis;
+}
+
+.submission-thumbnail {
+  padding: 10px 0px 40px 0px;
+}
+
+.submission-video {
+  width: 500px;
+  box-shadow: 0 3px 6px #1a1a1a;
+}
