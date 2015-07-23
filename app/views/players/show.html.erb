@@ -53,12 +53,14 @@
             </div>
           </div>
           <div class="row">
-            <div class="large-6 large-centered columns submission-thumbnail">
-              <% if @videos[index] != nil %>
-                <iframe width="560" height="315" src="<%= @videos[index] %>" allowfullscreen></iframe>
-              <% elsif @images[index] != nil %>
-                <%= image_tag @images[index], class: "submission-image" %>
-              <% end %>
+            <div class="large-10 columns">
+              <div class="large-6 large-centered columns submission-thumbnail">
+                <% if @videos[index] != nil %>
+                  <iframe width="560" height="315" src="<%= @videos[index] %>" allowfullscreen></iframe>
+                <% elsif @images[index] != nil %>
+                  <%= image_tag @images[index], class: "submission-image" %>
+                <% end %>
+              </div>
             </div>
           </div>
         <% end %>
