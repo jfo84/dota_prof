@@ -8,7 +8,6 @@ $(document).ready(function() {
       submissionId
     ).innerHTML;
     score = parseInt(score);
-
     if (flag) {
       score++;
       document.getElementById("score-" + submissionId).textContent = score;
@@ -25,9 +24,12 @@ $(document).ready(function() {
       score--;
       document.getElementById("score-" + submissionId).textContent = score;
 
+      unvote_Url = event.currentTarget.parentElement.parentElement.href
+      unvote_Url = unvote_Url.slice(0,-4) + "unlike"
+
       $.ajax({
         type: 'PUT',
-        url: event.currentTarget.parentElement.parentElement.href,
+        url: unvote_Url,
         dataType: 'json',
         success: function(data) {
 

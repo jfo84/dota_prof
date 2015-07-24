@@ -1,18 +1,16 @@
-<div id="main-show" class="large-12 large-centered columns">
-  <h1>Player Prof</h1>
-  <hr>
-  <div class="row player_match_data">
-    <div class="large-6 columns text-center name">
+<div id="main-show" class="large-12 large-centered columns clearfix">
+  <div class="row large-offset-1 player_match_data">
+    <div class="left large-4 columns text-center name">
       <% unless @player.name.nil? %>
-        <h3><%= @player.name %><h3>
+        <h1><%= @player.name %></h1>
       <% else %>
-        <h3>Player name missing.</h3>
+        <h1>Player name missing.</h1>
       <% end %>
       <h5>Favorite Hero: <%= @eight_four_hero %></h5>
       <%= image_tag "heroes/hero_#{@eight_four_hero_id}.jpg" %>
     </div>
-    <div class="left large-6 columns text-center stats">
-      <h3>Averages in 6.84</h3>
+    <div class="left large-4 columns text-center stats">
+      <h3>Current Patch Stats</h3>
       <h5>Kills: <%= @eight_four_matches.average(:kills).round(1) %> -
           Deaths: <%= @eight_four_matches.average(:deaths).round(1) %> -
           Assists: <%= @eight_four_matches.average(:assists).round(1) %></h5>
@@ -25,14 +23,14 @@
     </div>
   </div>
   <div class="row submissions">
-    <h1>Prof Submissions</h1>
+    <h3>User Submissions</h3>
     <hr>
     <div class="large-12 columns">
       <% unless @submissions.nil? %>
         <% @submissions.each_with_index do |submission, index| %>
           <div class="row">
             <div class="large-1 columns">
-              <span id="score-<%= submission.id %>"><h3><%= submission.votes_for.size %></h3></span>
+              <span class="score" id="score-<%= submission.id %>"><%= submission.votes_for.size %></span>
             </div>
             <div class="large-1 columns">
               <%= link_to like_player_submission_path(@player, submission), class: "like-button" do %>

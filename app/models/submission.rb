@@ -15,4 +15,6 @@ class Submission < ActiveRecord::Base
   }
 
   validates :content, presence: true
+  validates :user_id, presence: true
+  validates :player_id, presence: true
 end

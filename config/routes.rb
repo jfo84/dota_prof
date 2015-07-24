@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :submissions, only: [:new, :create, :show, :destroy] do
       member do
         put "like", to: "submissions#vote"
+        put "unlike", to: "submissions#unvote"
       end
     end
   end

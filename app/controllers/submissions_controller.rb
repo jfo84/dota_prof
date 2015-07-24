@@ -1,6 +1,8 @@
 class SubmissionsController < ApplicationController
-  before_action :authorize_user
+  before_action :authenticate_user!
   before_action :set_current_models, only: [:edit, :update, :destroy]
+
+  EXCEPTIONS = [URI::InvalidURIError, LinkThumbnailer::Exceptions]
 
   def new
     @submission = Submission.new
@@ -16,6 +18,36 @@ class SubmissionsController < ApplicationController
       redirect_to player_path(@player.account_id)
     else
       flash[:notice] = @submission.errors.full_messages.join(". ")
+
+      @submissions = @player.submissions.order(:cached_votes_up => :desc)
+      @submission = Submission.new
+      @videos = []
+      @images = []
+      @submissions.each do |submission|
+        begin
+          link_thumbnail = LinkThumbnailer.generate(submission.content)
+          unless link_thumbnail.videos[0].nil?
+            video = link_thumbnail.videos[0].src
+            @videos << video
+          else
+            image = link_thumbnail.images[0].src
+            @images << image
+          end
+        rescue *EXCEPTIONS
+          @videos << nil
+          @images << nil
+        end
+      end
+
+      @eight_four_matches = PlayerMatch.where("account_id = :account_id and start_time > :start_time", account_id: @player.account_id, start_time: 1430395200)
+      counts = Hash.new(0)
+      @eight_four_matches.each { |player_match| counts[player_match.hero_id] += 1 }
+      @eight_four_hero_id = counts.sort_by{|x,y| y}.last[0]
+      HeroID::HERO_HASH[:result][:heroes].each do |hero|
+        if @eight_four_hero_id == hero[:id]
+          @eight_four_hero = hero[:name]
+        end
+      end
       render "players/show"
     end
   end
@@ -25,6 +57,23 @@ class SubmissionsController < ApplicationController
 
     respond_to do |format|
       if @submission.liked_by current_user
+        format.json {
+          render json: {
+            id: @submission.id,
+            size: @submission.votes_for.size,
+          }
+        }
+      else
+        render json: {}
+      end
+    end
+  end
+
+  def unvote
+    @submission = Submission.find(params[:id])
+
+    respond_to do |format|
+      if @submission.unliked_by current_user
         format.json {
           render json: {
             id: @submission.id,
@@ -76,11 +125,5 @@ class SubmissionsController < ApplicationController
       :user_id,
       :player_id
     )
-  end
-
-  def authorize_user
-    if !user_signed_in? && current_user != Submission.find(params[:id]).user
-      raise ActionController::RoutingError.new("Not Found")
-    end
   end
 end
