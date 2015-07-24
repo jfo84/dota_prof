@@ -1,5 +1,5 @@
-<div id="main-index" class="large-12 columns">
-  <div class="large-offset-1 row">
+<div id="main-index" class="large-12 large-centered columns">
+  <div class="row">
     <div class="large-3 columns">
       <%= image_tag "dota_prof_logo.png", :class => "logo" %>
     </div>
@@ -7,7 +7,7 @@
   </div>
   <% counter = 0 %>
   <% @teams.each_with_index do |team, index| %>
-    <div class="team large-offset-1 row">
+    <div class="row team">
       <div class="panel">
         <div class="clearfix">
           <%= image_tag "teams/team_#{index}.jpg", :class => "team-image left" %>

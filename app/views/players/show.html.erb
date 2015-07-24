@@ -1,8 +1,8 @@
 <div id="main-show" class="large-12 large-centered columns">
   <h1>Player Prof</h1>
   <hr>
-  <div class="row large-offset-2 player_match_data">
-    <div class="large-4 columns text-center name">
+  <div class="row player_match_data">
+    <div class="large-6 columns text-center name">
       <% unless @player.name.nil? %>
         <h3><%= @player.name %><h3>
       <% else %>
@@ -11,7 +11,7 @@
       <h5>Favorite Hero: <%= @eight_four_hero %></h5>
       <%= image_tag "heroes/hero_#{@eight_four_hero_id}.jpg" %>
     </div>
-    <div class="left large-4 columns text-center stats">
+    <div class="left large-6 columns text-center stats">
       <h3>Averages in 6.84</h3>
       <h5>Kills: <%= @eight_four_matches.average(:kills).round(1) %> -
           Deaths: <%= @eight_four_matches.average(:deaths).round(1) %> -
