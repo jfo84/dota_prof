@@ -11,15 +11,15 @@
     </div>
     <div class="left large-4 columns text-center stats">
       <h3>Current Patch Stats</h3>
-      <h5>Kills: <%= @eight_four_matches.average(:kills).round(1) %> -
-          Deaths: <%= @eight_four_matches.average(:deaths).round(1) %> -
-          Assists: <%= @eight_four_matches.average(:assists).round(1) %></h5>
-      <h5>GPM: <%= @eight_four_matches.average(:gpm).to_i %> -
-          XPM: <%= @eight_four_matches.average(:xpm).to_i %></h5>
-      <h5>Hero Damage: <%= @eight_four_matches.average(:hero_damage).to_i %></h5>
-      <h5>Tower Damage: <%= @eight_four_matches.average(:tower_damage).to_i %></h5>
-      <h5>Last Hits: <%= @eight_four_matches.average(:last_hits).to_i %> -
-          Denies: <%= @eight_four_matches.average(:denies).to_i %></h5>
+      <h5>Kills <%= @eight_four_matches.average(:kills).round(1) %> -
+          Deaths <%= @eight_four_matches.average(:deaths).round(1) %> -
+          Assists <%= @eight_four_matches.average(:assists).round(1) %></h5>
+      <h5>GPM <%= @eight_four_matches.average(:gpm).to_i %> -
+          XPM <%= @eight_four_matches.average(:xpm).to_i %></h5>
+      <h5>Hero Damage <%= number_with_delimiter(@eight_four_matches.average(:hero_damage).to_i, delimiter: ",") %></h5>
+      <h5>Tower Damage <%= number_with_delimiter(@eight_four_matches.average(:tower_damage).to_i, delimiter: ",") %></h5>
+      <h5>Last Hits <%= @eight_four_matches.average(:last_hits).to_i %> -
+          Denies <%= @eight_four_matches.average(:denies).to_i %></h5>
     </div>
   </div>
   <div class="row submissions">
@@ -63,13 +63,15 @@
       <% end %>
     </div>
     <div class="new-submission container">
-      <%= form_for [@player, @submission] do |f| %>
+      <div class="large-10 columns">
+        <%= form_for [@player, @submission] do |f| %>
 
-        <%= f.label "content" %>
-        <%= f.text_area :content %>
+          <%= f.label "content" %>
+          <%= f.text_area :content %>
 
-        <%= f.submit "Submit", class: "button tiny round" %>
-      <% end %>
+          <%= f.submit "Submit", class: "button tiny round" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
