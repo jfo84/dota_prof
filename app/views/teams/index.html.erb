@@ -27,30 +27,37 @@
             </a>
           <% end %>
           <a href="#" class="team-details-link">
-            <div class="large-1 columns view-team-details">
-              View Draft Prof
-            </div>
+            <div class="large-1 columns view-team-details">View Team Prof</div>
           </a>
         </div>
         <div class="row" style="display:none">
           <div class="large-12 large-centered columns team-info">
             <hr>
-            <div class="large-4 columns draft clearfix">
-              <h3>Top Captain</h3>
-              <h3><i><%= Player.find_by(account_id: @captain_list[index][0][0]).name %></i></h3>
-              <h3>W/L <%= @win_list[index][0][1] %> - <%= @captain_list[index][0][1] - @win_list[index][0][1] %></h3>
-              <% unless @captain_list[index][1].nil? || @captain_list[index][1][1] < 5 %>
-                <hr>
-                <h3>#2 Captain</h3>
-                <h3><i><%= Player.find_by(account_id: @captain_list[index][1][0]).name %></i></h3>
-                <h3>W/L <%= @win_list[index][1][1] %> - <%= @captain_list[index][1][1] - @win_list[index][1][1] %></h3>
-              <% end %>
-            </div>
-            <div class="large-4 columns draft clearfix">
+            <div class="row draft-stats">
+              <div class="large-4 columns draft clearfix">
+                <h3>Top Captain</h3>
+                <h3><i><%= Player.find_by(account_id: @captain_list[index][0][0]).name %></i></h3>
+                <h3>W/L <%= @win_list[index][0][1] %> - <%= @captain_list[index][0][1] - @win_list[index][0][1] %></h3>
+                <% unless @captain_list[index][1].nil? || @captain_list[index][1][1] < 5 %>
+                  <hr>
+                  <h3>#2 Captain</h3>
+                  <h3><i><%= Player.find_by(account_id: @captain_list[index][1][0]).name %></i></h3>
+                  <h3>W/L <%= @win_list[index][1][1] %> - <%= @captain_list[index][1][1] - @win_list[index][1][1] %></h3>
+                <% end %>
+              </div>
+              <div class="large-4 columns draft clearfix">
                 <h3>Top Picks </h3><%= image_tag "heroes/hero_#{@pick_list[index][0][0]}.jpg" %><%= image_tag "heroes/hero_#{@pick_list[index][1][0]}.jpg" %>
-            </div>
-            <div class="large-4 columns draft clearfix">
+              </div>
+              <div class="large-4 columns draft clearfix">
                 <h3>Top Bans </h3><%= image_tag "heroes/hero_#{@ban_list[index][0][0]}.jpg" %><%= image_tag "heroes/hero_#{@pick_list[index][1][0]}.jpg" %>
+              </div>
+            </div>
+            <hr>
+            <div class="large-6 columns first-blood">
+              <h3>Avg First Blood Timing - <%= Time.at(@eight_four_matches[index].average(:first_blood)).utc.strftime("%M:%S") %></h3>
+            </div>
+            <div class="large-6 columns duration">
+              <h3>Avg Match Duration - <%= Time.at(@eight_four_matches[index].average(:duration)).utc.strftime("%M:%S") %></h3>
             </div>
           </div>
         </div>

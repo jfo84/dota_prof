@@ -22,25 +22,11 @@
 
 body {
  background-color: #B2B2B2;
- font-family: 'Quicksand', sans-serif;
  overflow-x: hidden;
-}
-
-body h1 {
-  font-family: 'Quicksand', sans-serif;
-}
-
-body h3 {
-  font-family: 'Quicksand', sans-serif;
-}
-
-body h5 {
-  font-family: 'Quicksand', sans-serif;
 }
 
 .panel h3 {
   color: white;
-  font-family: 'Quicksand', sans-serif;
 }
 
 #main-index {

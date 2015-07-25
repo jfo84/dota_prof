@@ -30,6 +30,10 @@ FactoryGirl.define do
     match_id 1
   end
 
+  factory :team_match do
+    team_id 1
+  end
+
   factory :submission do
     content "hella awesome"
     player

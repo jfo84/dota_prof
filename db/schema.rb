@@ -99,8 +99,6 @@ ActiveRecord::Schema.define(version: 20150723210931) do
     t.datetime "updated_at",               null: false
   end
 
-  add_index "team_matches", ["team_id"], name: "index_team_matches_on_team_id", using: :btree
-
   create_table "teams", force: :cascade do |t|
     t.string   "name"
     t.string   "roster",     default: [],              array: true
