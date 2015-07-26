@@ -1,9 +1,12 @@
 <div id="main-index" class="large-12 large-centered columns">
-  <div class="row">
+  <div class="row title-row">
     <div class="large-3 columns">
       <%= image_tag "dota_prof_logo.png", :class => "logo" %>
     </div>
-    <div class="title left large-9 columns text-center">DOTA - PROF</div>
+    <span class="title">DOTA - PROF</span>
+  </div>
+  <div class="row">
+    <span class="index-name">Team Rankings</span>
   </div>
   <% counter = 0 %>
   <% @teams.each_with_index do |team, index| %>

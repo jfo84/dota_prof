@@ -42,11 +42,24 @@ body {
  margin-bottom: 5px;
 }
 
+.title-row {
+  margin: 0px;
+}
+
 .title {
  color: white;
  font-size: 110px;
  text-align: center;
- position: relative;
+ margin-left: 20px;
+}
+
+.index-name {
+  color: white;
+  font-size: 40px;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 60px;
+  margin-left: 20px;
 }
 
 .row {
