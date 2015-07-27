@@ -57,10 +57,10 @@
             </div>
             <hr>
             <div class="large-6 columns first-blood">
-              <h3>Avg First Blood Timing - <%= Time.at(@eight_four_matches[index].average(:first_blood)).utc.strftime("%M:%S") %></h3>
+              <h3>Avg First Blood Timing - <%= Time.at(@team_matches[index].average(:first_blood)).utc.strftime("%M:%S") %></h3>
             </div>
             <div class="large-6 columns duration">
-              <h3>Avg Match Duration - <%= Time.at(@eight_four_matches[index].average(:duration)).utc.strftime("%M:%S") %></h3>
+              <h3>Avg Match Duration - <%= Time.at(@team_matches[index].average(:duration)).utc.strftime("%M:%S") %></h3>
             </div>
           </div>
         </div>

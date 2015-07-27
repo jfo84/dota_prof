@@ -6,20 +6,20 @@
       <% else %>
         <h1>Player name missing.</h1>
       <% end %>
-      <h5>Favorite Hero - <%= @eight_four_hero %></h5>
-      <%= image_tag "heroes/hero_#{@eight_four_hero_id}.jpg" %>
+      <h5>Favorite Hero - <%= @player_hero %></h5>
+      <%= image_tag "heroes/hero_#{@player_hero_id}.jpg" %>
     </div>
     <div class="left large-4 columns text-center stats">
       <h3>Current Patch Stats</h3>
-      <h5>Kills <%= @eight_four_matches.average(:kills).round(1) %> -
-          Deaths <%= @eight_four_matches.average(:deaths).round(1) %> -
-          Assists <%= @eight_four_matches.average(:assists).round(1) %></h5>
-      <h5>GPM <%= @eight_four_matches.average(:gpm).to_i %> -
-          XPM <%= @eight_four_matches.average(:xpm).to_i %></h5>
-      <h5>Hero Damage <%= number_with_delimiter(@eight_four_matches.average(:hero_damage).to_i, delimiter: ",") %></h5>
-      <h5>Tower Damage <%= number_with_delimiter(@eight_four_matches.average(:tower_damage).to_i, delimiter: ",") %></h5>
-      <h5>Last Hits <%= @eight_four_matches.average(:last_hits).to_i %> -
-          Denies <%= @eight_four_matches.average(:denies).to_i %></h5>
+      <h5>Kills <%= @player_matches.average(:kills).round(1) %> -
+          Deaths <%= @player_matches.average(:deaths).round(1) %> -
+          Assists <%= @player_matches.average(:assists).round(1) %></h5>
+      <h5>GPM <%= @player_matches.average(:gpm).to_i %> -
+          XPM <%= @player_matches.average(:xpm).to_i %></h5>
+      <h5>Hero Damage <%= number_with_delimiter(@player_matches.average(:hero_damage).to_i, delimiter: ",") %></h5>
+      <h5>Tower Damage <%= number_with_delimiter(@player_matches.average(:tower_damage).to_i, delimiter: ",") %></h5>
+      <h5>Last Hits <%= @player_matches.average(:last_hits).to_i %> -
+          Denies <%= @player_matches.average(:denies).to_i %></h5>
     </div>
   </div>
   <div class="row submissions">
