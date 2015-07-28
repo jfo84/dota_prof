@@ -4,92 +4,58 @@ feature 'user creates a submission' do
 
   # Acceptance Criteria
   # [x] User must submit content
-  # [x] If they submit incomplete information, then they get an error and the
-  #     form page rerenders
-  # [x] If there's more than one review, show a list
-
-  scenario 'authenticated user visits attempts to add a review' do
-    player = FactoryGirl.create(:player)
-    user = player.user
-    sign_in(user)
-
-    visit player_path(player.account_id)
-
-    expect(page).to have_content("Content")
-  end
+  # [x] If they submit incomplete information, then they get
+  #      an error and the form page rerenders
+  # [x] If there's more than one submission, show a list with
+  #      highest score first
 
   scenario 'unauthenticated user attempts to add a review' do
     player = FactoryGirl.create(:player)
+    FactoryGirl.create(:player_match, player: player)
 
     visit player_path(player.account_id)
 
     fill_in "Content", with: "I love the best player!"
-
-    click_link "Submit"
+    click_button "Submit"
 
     expect(page).to have_content("Log in")
   end
 
-  scenario 'user submits new review for a player' do
+  scenario 'user submits new submission for a player' do
     player = FactoryGirl.create(:player)
-    user = player.user
+    FactoryGirl.create(:player_match, player: player)
+    user = FactoryGirl.create(:user)
     sign_in(user)
 
-    first(:link, player.name).click
+    visit player_path(player.account_id)
 
-    click_link 'Write a Review'
-
-    select 'Great - 5', from: 'Rating'
-    fill_in "Description", with: "Best player ever"
+    fill_in "Content", with: "I love the best player!"
     click_button "Submit"
 
-    expect(page).to have_content("Best player ever")
+    expect(page).to have_content("Best Player")
   end
 
   scenario 'user submits incomplete information for a review for a player' do
     player = FactoryGirl.create(:player)
-    user = player.user
+    FactoryGirl.create(:player_match, player: player)
+    user = FactoryGirl.create(:user)
     sign_in(user)
 
-    first(:link, player.name).click
-
-    click_link 'Write a Review'
+    visit player_path(player.account_id)
 
     click_button "Submit"
     expect(page).to have_content("can\'t be blank")
   end
 
-  scenario 'users submits two reviews for one player' do
+  scenario 'user views multiple submissions on players show page' do
     player = FactoryGirl.create(:player)
-    user = FactoryGirl.create(:user)
+    FactoryGirl.create(:player_match, player: player)
+    submission1 = FactoryGirl.create(:submission, player: player)
+    submission2 = FactoryGirl.create(:submission, player: player)
 
-    visit root_path
+    visit player_path(player.account_id)
 
-    login_as(user, scope: :user, run_callbacks: false)
-
-    visit new_player_review_path(player)
-
-    select 'Great - 5', from: 'Rating'
-    fill_in "Description", with: "Best player ever"
-    click_button "Submit"
-
-    visit new_player_review_path(player)
-
-    select 'Great - 5', from: 'Rating'
-    fill_in "Description", with: "Best player ever"
-    click_button "Submit"
-
-    expect(page).to have_content("User can only submit one review for a player.")
-  end
-
-  scenario 'user views multiple reviews on playeres show page' do
-    player = FactoryGirl.create(:player)
-    review1 = FactoryGirl.create(:review, player: player)
-    review2 = FactoryGirl.create(:review, player: player)
-
-    visit player_path(player)
-
-    expect(page).to have_content(review1.description)
-    expect(page).to have_content(review2.description)
+    expect(page).to have_content(submission1.content)
+    expect(page).to have_content(submission2.content)
   end
 end

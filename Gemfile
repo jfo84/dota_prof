@@ -32,6 +32,8 @@ group :development, :test do
   gem 'shoulda-matchers', require: false
   gem 'fuzzy_match'
   gem 'pry-rails'
+  # gem 'webmock'
+  gem 'poltergeist'
 end
 
 ruby "2.2.0"

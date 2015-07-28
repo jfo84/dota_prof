@@ -5,7 +5,8 @@ class SubmissionsController < ApplicationController
   EXCEPTIONS = [URI::InvalidURIError, LinkThumbnailer::Exceptions]
 
   def new
-    @submission = Submission.new
+    @player = Player.find(params[:player_id])
+    @submission = Submission.new(submission_params)
   end
 
   def create
@@ -18,9 +19,7 @@ class SubmissionsController < ApplicationController
       redirect_to player_path(@player.account_id)
     else
       flash[:notice] = @submission.errors.full_messages.join(". ")
-
       @submissions = @player.submissions.order(:cached_votes_up => :desc)
-      @submission = Submission.new
       @videos = []
       @images = []
       @submissions.each do |submission|
@@ -38,9 +37,9 @@ class SubmissionsController < ApplicationController
           @images << nil
         end
       end
-
-      @player_hero_id = hero_id(@player)
-      @player_hero = hero(@player_hero_id)
+      @player_matches = PlayerMatch.where("account_id = :account_id and start_time > :start_time", account_id: @player.account_id, start_time: 1430395200)
+      @player_hero_id = @player.hero_id
+      @player_hero = @player.hero
       render "players/show"
     end
   end

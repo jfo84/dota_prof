@@ -15,9 +15,11 @@ class PlayersController < ApplicationController
         unless link_thumbnail.videos[0].nil?
           video = link_thumbnail.videos[0].src
           @videos << video
+          @images << nil
         else
           image = link_thumbnail.images[0].src
           @images << image
+          @videos << nil
         end
       rescue *EXCEPTIONS
         @videos << nil

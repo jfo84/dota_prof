@@ -28,6 +28,7 @@ FactoryGirl.define do
     radiant_win true
     start_time 1437764282
     match_id 1
+    player_id 1
   end
 
   factory :team_match do

@@ -8,8 +8,15 @@ require 'rspec/rails'
 require 'shoulda-matchers'
 require File.join(File.dirname(__FILE__), 'support/valid_attribute')
 require File.join(File.dirname(__FILE__), 'support/factory_girl')
+require File.join(File.dirname(__FILE__), 'support/sign_in')
 require 'capybara/rspec'
-# Add additional requires below this line. Rails is not loaded until this point!
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
+
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
+include Warden::Test::Helpers
+Warden.test_mode!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
