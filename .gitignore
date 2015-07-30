@@ -1,4 +1,4 @@
-# Ignore all logfiles and tempfiles.
+Procfile
 /log/*.log
 /tmp/*
 .env
