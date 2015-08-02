@@ -2,7 +2,7 @@
 
 # A professional team and player profile page for Dota 2
 
-![main page](http://imgur.com/VcCwdOe)
+![main page](http://i.imgur.com/VcCwdOe.png)
 
 ##### Backed by JSON match database generated from the Steam API
 
@@ -10,7 +10,7 @@
 - Dota 2 data is sliceable by player and by team
 - Sorted player indices coming soon!
 
-![sample content](http://imgur.com/33aar4z)
+![sample content](http://i.imgur.com/33aar4z.png)
 
 - User submission system provides for dynamic thumbnails
 
