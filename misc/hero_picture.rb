@@ -1,5 +1,4 @@
 require 'httparty'
-require 'pry'
 
 HERO_HASH =
 

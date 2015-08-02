@@ -2,7 +2,6 @@ require 'nokogiri'
 require 'open-uri'
 require 'httparty'
 require 'json'
-require 'pry'
 
 require_relative 'assets/account_id'
 require_relative 'assets/team_data'
