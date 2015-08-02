@@ -54,7 +54,9 @@
                 <% if @videos[index] != nil %>
                   <iframe width="560" height="315" src="<%= @videos[index] %>" allowfullscreen></iframe>
                 <% elsif @images[index] != nil %>
-                  <%= image_tag @images[index], class: "submission-image" %>
+                  <a href="<%= submission.content %>">
+                    <%= image_tag @images[index], class: "submission-image" %>
+                  </a>
                 <% end %>
               </div>
             </div>
