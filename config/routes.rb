@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     end
   end
 
-
   resources :submissions, only: [:edit, :update]
+
+  resources :homes, only: :index
 end
