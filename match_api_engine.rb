@@ -62,34 +62,3 @@ def database_entry
   end
 end
 
-# game_mode's 1 and 2 are all we want. Fixed on SQL insert side
-
-# def bad_games
-#   counter = 3
-#   19.times do
-#     Match.where("payload -> 'result' ->> 'game_mode' = '#{counter}'").destroy_all
-#     counter += 1
-#   end
-#   Match.where("(payload -> 'result' ->> 'radiant_team_id') is null").destroy_all
-#   Match.where("(payload -> 'result' ->> 'dire_team_id') is null").destroy_all
-# end
-
-# def pro_ids
-#   Hash[league_ids.zip(league_match_ids.map)]
-# end
-
-# For non-league games
-#
-# def player_id_hash
-#   top_fifty_players = player_list[0..49]
-#   player_id_hash = Hash[top_fifty_players.zip(ACCOUNT_ID.map)]
-# end
-#
-# player_id_hash.each do |player_name, account_id|
-#
-# end
-
-# redis = Redis.new
-
-# max_date=#{steam_data["result"]["matches"].last["match_seq_num"]}
-# redis.set team_id, steam_data

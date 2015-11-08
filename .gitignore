@@ -2,3 +2,4 @@ Procfile
 /log/*.log
 /tmp/*
 .env
+.idea/*
