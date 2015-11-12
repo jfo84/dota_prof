@@ -4,7 +4,9 @@
 
 ![main page](http://i.imgur.com/VcCwdOe.png)
 
-##### Backed by JSON match database generated from the Steam API
+#### http://dota-prof.herokuapp.com/
+
+### Backed by JSON match database generated from the Steam API
 
 - Large dataset tied together through variety of web scraping and data manipulation
 - Dota 2 data is sliceable by player and by team
@@ -14,7 +16,7 @@
 
 - User submission system provides for dynamic thumbnails
 
-#### Contribute!
+### Contribute!
 1. Fork it
 2. Create your feature branch (`git checkout -b my-feature`)
 3. Commit your changes (`git commit -am 'Added some feature'`)
